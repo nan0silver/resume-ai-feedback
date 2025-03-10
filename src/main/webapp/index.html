@@ -34,15 +34,36 @@
             controller.setAttribute("disabled", true);
 
             const prompt = document.querySelector("#prompt").value;
+            console.log("입력된 prompt 값:", prompt); // 값 확인
             const model = document.querySelector("#model").value;
 
-            const response  = await fetch(`./api?prompt=${prompt}&model=${model}`, {
-                headers: {
-                    "Content-Type" : "application/json"
+            if (!prompt.trim()) {
+                alert("자기소개서를 입력해주세요!");
+                return;
+            }
+
+            try {
+                const response = await fetch(`./api?prompt=${encodeURIComponent(prompt)}&model=${model}`, {
+                    headers: { "Content-Type": "application/json" }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status}`);
                 }
-            });
-            const json = await response.json();
-            document.querySelector("#response").textContent = json.content;
+
+                const text = await response.text(); // JSON이 아닐 수도 있으므로 먼저 text로 확인
+                console.log(text);
+                try {
+                    const json = JSON.parse(text);
+                    document.querySelector("#response").textContent = json.content;
+                } catch (error) {
+                    console.error("JSON Parse Error:", error, "Server Response:", text);
+                    document.querySelector("#response").textContent = "오류 발생: 서버에서 올바른 응답을 받지 못했습니다.";
+                }
+            } catch (error) {
+                console.error("Fetch Error:", error);
+                document.querySelector("#response").textContent = "서버와 통신 중 문제가 발생했습니다.";
+            }
         })
     </script>
 
