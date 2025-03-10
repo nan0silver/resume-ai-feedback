@@ -26,6 +26,13 @@ public class APIController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
+
+        // CORS 헤더 추가
+        resp.setHeader("Access-Control-Allow-Origin", "*");  // 모든 origin 허용
+        resp.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
+        resp.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        resp.setHeader("Access-Control-Max-Age", "3600");
+
         // ?prompt=점메추&model=gpt
         String prompt = req.getParameter("prompt");
         String modelParam = req.getParameter("model");
