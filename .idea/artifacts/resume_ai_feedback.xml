@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="resume-ai-feedback">
+    <output-path>$PROJECT_DIR$/out/artifacts/resume_ai_feedback</output-path>
+    <root id="root" />
+  </artifact>
+</component>

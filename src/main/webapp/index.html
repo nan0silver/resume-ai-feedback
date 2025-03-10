@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 이력서 피드백 도구</title>
+    <style>
+        /* Google Font 사용 */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        #response {
+            padding: 15px;
+            border: 2px dashed #ff758c;
+            background: #fff5f5;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        button {
+            background: #ff758c;
+            color: white;
+            font-size: 16px;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #ff5a7b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📄 AI 이력서 피드백</h2>
+        <div id="response">여기에 피드백이 표시됩니다</div>
+        <form id="controller">
+            <input id="prompt" placeholder="여기에 자기소개서를 입력하세요">
+            <!-- 파일 업로드 -->
+            <div class="file-upload">
+                <input type="file" id="resume-file" accept=".pdf">
+                <small>PDF 파일을 업로드하면 자동 분석됩니다.</small>
+            </div>
+
+            <select id="model">
+                <option value="GROQ_LLAMA">GROQ</option>
+                <option value="TOGETHER_LLAMA">TOGETHER</option>
+            </select>
+            <button id="analyze-button">물어보기</button>
+        </form>
+    </div>
+    <script>
+        const controller = document.querySelector("#controller");
+        controller.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            // alert("폼폼 폼클린징");
+            const prompt = document.querySelector("#prompt").value;
+            const model = document.querySelector("#model").value;
+            alert(`${prompt} ${model}`);
+
+            const response  = await fetch(`./api?prompt=${prompt}&model=${model}`, {
+                headers: {
+                    "Content-Type" : "application/json"
+                }
+            });
+            const json = await response.json();
+            alert(JSON.stringify(json)) ;
+        })
+    </script>
+
+</body>
+</html>
