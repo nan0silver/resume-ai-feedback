@@ -1,4 +1,3 @@
-/* Google Font 사용 */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 * {
@@ -13,7 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    background: linear-gradient(135deg, #667eea, #764ba2);
     padding: 20px;
 }
 
@@ -23,7 +22,7 @@ body {
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     text-align: center;
-    max-width: 400px;
+    max-width: 500px;
     width: 100%;
 }
 
@@ -35,12 +34,13 @@ h2 {
 
 #response {
     padding: 15px;
-    border: 2px dashed #ff758c;
-    background: #fff5f5;
+    border: 2px dashed #667eea;
+    background: #f5f5ff;
     border-radius: 8px;
     margin-bottom: 20px;
     font-size: 14px;
     color: #555;
+    min-height: 100px;
 }
 
 form {
@@ -49,7 +49,7 @@ form {
     gap: 15px;
 }
 
-input, select {
+textarea, select, input[type="file"] {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -58,7 +58,7 @@ input, select {
 }
 
 button {
-    background: #ff758c;
+    background: #667eea;
     color: white;
     font-size: 16px;
     padding: 12px;
@@ -69,5 +69,21 @@ button {
 }
 
 button:hover {
-    background: #ff5a7b;
+    background: #556cd6;
+}
+
+.file-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.download-btn {
+    background: #4caf50;
+    margin-top: 10px;
+}
+
+.download-btn:hover {
+    background: #43a047;
 }
