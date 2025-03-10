@@ -30,7 +30,8 @@
         const controller = document.querySelector("#controller");
         controller.addEventListener("submit", async (event) => {
             event.preventDefault();
-
+            // 폼 제출 중복 방지를 위해 폼 비활성화 (선택적)
+            controller.setAttribute("disabled", true);
 
             const prompt = document.querySelector("#prompt").value;
             const model = document.querySelector("#model").value;
@@ -41,7 +42,7 @@
                 }
             });
             const json = await response.json();
-            document.querySelector("" + "#response").textContent = json.content;
+            document.querySelector("#response").textContent = json.content;
         })
     </script>
 
